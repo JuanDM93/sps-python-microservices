@@ -52,6 +52,22 @@ export MONGODB_URI=mongodb://localhost:27017/flaskr
 flask run
 ```
 
+## Resources
+
+Resources are the main components of the application. All of them are accessible through the API endpoint.
+
+### API description endpoint
+
+The documentation is available at the */spec* endpoint.
+
+- GET /spec - Get the Swagger documentation (JSON)
+
+### Healthcheck
+
+The Healthcheck endpoint is a simple endpoint that returns the health of the API.
+
+- GET /api/health - Get the health of the application
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
