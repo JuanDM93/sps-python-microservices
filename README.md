@@ -6,10 +6,12 @@ This is a microservices solution which is a simple Flask app that serves a Blog 
 
 - [Python](https://www.python.org/) - The programming language used
 - [Flask](http://flask.pocoo.org/) - The web framework used
+- [MongoDB](https://www.mongodb.com/) - The database used
 
 ## Prerequisites
 
 - Python 3.6 or higher
+- MongoDB (optional)
 
 ## Installing
 
@@ -34,8 +36,15 @@ pip install -r requirements.txt
 
 ```bash
 export FLASK_APP=flaskr
-export FLASK_DEBUG=1
 ```
+
+- For the DATABASE you can use a config.py file in the */instance* folder, follow the example in config-example.py provided at */docs*. Or you can set the MONGODB_URI environment variable.
+
+```bash
+export MONGODB_URI=mongodb://localhost:27017/flaskr
+```
+
+(if you are not using MongoDB locally you can use a remote MongoDB Atlas instance instead at [https://www.mongodb.com/cloud/atlas](https://www.mongodb.com/cloud/atlas))
 
 - Run the app
 
