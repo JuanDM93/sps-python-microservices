@@ -20,20 +20,26 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
 
     # app setup
-    from .utils import db
+    from .utils import db, handler
     db.init_app(app)
+    app.register_error_handler(Exception, handler.error_handler)
 
     # apis
-    from .apis import Health
     api_bp = Blueprint('api', __name__, url_prefix='/api')
-
     rest = Api(api_bp)
+
+    from .apis.health import Health
     rest.add_resource(Health, '/health')
+
+    # auth
+    from .apis.auth import Register, Login
+    rest.add_resource(Register, '/auth/register')
+    rest.add_resource(Login, '/auth/login')
 
     app.register_blueprint(api_bp)
 
     # blueprints
-    from .apis import docs
-    app.register_blueprint(docs.swagger_bp)
+    from .apis.docs import swagger_bp
+    app.register_blueprint(swagger_bp)
 
     return app
