@@ -56,6 +56,12 @@ flask run
 
 Resources are the main components of the application. All of them are accessible through the API endpoint.
 
+### Index
+
+The Index endpoint is the main endpoint of the application. It displays the API welcome message.
+
+- GET / - Get the API welcome message
+
 ### API description endpoint
 
 The documentation is available at the */spec* endpoint.
@@ -89,6 +95,10 @@ The Blog endpoint is used to manage the blogs.
 - GET /api/blogs/{id} - Get a blog
 - PUT /api/blogs/{id} - Update a blog
 - DELETE /api/blogs/{id} - Delete a blog
+
+## Acknowledgments
+
+- Pokemon API - [https://pokeapi.co/](https://pokeapi.co/)
 
 ## License
 

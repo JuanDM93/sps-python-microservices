@@ -24,22 +24,27 @@ def create_app(test_config=None):
     db.init_app(app)
     app.register_error_handler(Exception, handler.error_handler)
 
+    # index
+    from .utils.index import index_bp
+    app.register_blueprint(index_bp)
+
     # api
     api_bp = Blueprint('api', __name__, url_prefix='/api')
-    rest = Api(api_bp)
+    api = Api(api_bp)
 
+    # health
     from .apis.health import Health
-    rest.add_resource(Health, '/health')
+    api.add_resource(Health, '/health')
 
     # auth
     from .apis.auth import Register, Login
-    rest.add_resource(Register, '/auth/register')
-    rest.add_resource(Login, '/auth/login')
+    api.add_resource(Register, '/auth/register')
+    api.add_resource(Login, '/auth/login')
 
     # blogs
     from .apis.blogs import BlogList, BlogDetail
-    rest.add_resource(BlogList, '/blogs')
-    rest.add_resource(BlogDetail, '/blogs/<string:id>')
+    api.add_resource(BlogList, '/blogs')
+    api.add_resource(BlogDetail, '/blogs/<string:id>')
 
     # blueprints
     from .apis.docs import swagger_bp
