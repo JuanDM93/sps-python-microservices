@@ -68,6 +68,28 @@ The Healthcheck endpoint is a simple endpoint that returns the health of the API
 
 - GET /api/health - Get the health of the application
 
+### Authentication
+
+The Authentication endpoint is used to authenticate the user and get a token.
+
+- POST /api/auth/register - Register a new user
+- POST /api/auth/login - Login an existing user
+
+### Blogs
+
+The Blog endpoint is used to manage the blogs.
+
+- Blog Model (BSON)
+  - id: ObjectId
+  - title: String
+  - content: String
+
+- GET /api/blogs - Get all the blogs
+- POST /api/blogs - Create a new blog
+- GET /api/blogs/{id} - Get a blog
+- PUT /api/blogs/{id} - Update a blog
+- DELETE /api/blogs/{id} - Delete a blog
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
