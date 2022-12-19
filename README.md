@@ -7,11 +7,13 @@ This is a microservices solution which is a simple Flask app that serves a Blog 
 - [Python](https://www.python.org/) - The programming language used
 - [Flask](http://flask.pocoo.org/) - The web framework used
 - [MongoDB](https://www.mongodb.com/) - The database used
+- [Docker](https://www.docker.com/) - The containerization platform used
 
 ## Prerequisites
 
 - Python 3.6 or higher
 - MongoDB (optional)
+- Docker (optional)
 
 ## Installing
 
@@ -50,6 +52,26 @@ export MONGODB_URI=mongodb://localhost:27017/flaskr
 
 ```bash
 flask run
+```
+
+### Dockerized
+
+- Build the image
+
+```bash
+docker build -t flaskr .
+```
+
+- Run the container
+
+```bash
+docker run -p <port>:5000 -e "MONGODB_URI: <mongodb_uri>" flaskr
+```
+
+- Or use docker-compose
+
+```bash
+docker-compose up
 ```
 
 ## Resources
