@@ -111,6 +111,10 @@ kubectl delete -f kubernetes/deployment.yaml
 kubectl scale deployment flaskr --replicas=<number>
 ```
 
+### Fly.io
+
+- This project is deployed on [Fly.io](https://fly.io/). It can be accessed at [https://flaskr-sps.fly.dev/](https://flaskr-sps.fly.dev/).
+
 ## Resources
 
 Resources are the main components of the application. All of them are accessible through the API endpoint.
@@ -119,26 +123,26 @@ Resources are the main components of the application. All of them are accessible
 
 The Index endpoint is the main endpoint of the application. It displays the API welcome message.
 
-- GET / - Get the API welcome message
+- `GET /` - Get the API welcome message
 
 ### API description endpoint
 
 The documentation is available at the */spec* endpoint.
 
-- GET /spec - Get the Swagger documentation (JSON)
+- `GET /spec` - Get the Swagger documentation (JSON)
 
 ### Healthcheck
 
 The Healthcheck endpoint is a simple endpoint that returns the health of the API.
 
-- GET /api/health - Get the health of the application
+- `GET /api/health` - Get the health of the application
 
 ### Authentication
 
 The Authentication endpoint is used to authenticate the user and get a token.
 
-- POST /api/auth/register - Register a new user
-- POST /api/auth/login - Login an existing user
+- `POST /api/auth/register` - Register a new user
+- `POST /api/auth/login` - Login an existing user
 
 ### Blogs
 
@@ -149,11 +153,11 @@ The Blog endpoint is used to manage the blogs.
   - title: String
   - content: String
 
-- GET /api/blogs - Get all the blogs
-- POST /api/blogs - Create a new blog
-- GET /api/blogs/{id} - Get a blog
-- PUT /api/blogs/{id} - Update a blog
-- DELETE /api/blogs/{id} - Delete a blog
+- `GET /api/blogs` - Get all the blogs
+- `POST /api/blogs` - Create a new blog
+- `GET /api/blogs/{id}` - Get a blog
+- `PUT /api/blogs/{id}` - Update a blog
+- `DELETE /api/blogs/{id}` - Delete a blog
 
 ## Acknowledgments
 
