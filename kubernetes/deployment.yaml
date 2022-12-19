@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flaskr
+  labels:
+    app: flaskr
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: flaskr
+  template:
+    metadata:
+      labels:
+        app: flaskr
+    spec:
+      containers:
+        - name: flaskr
+          image: sps/flaskr:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5000
+          env:
+            - name: FLASK_APP
+              value: flaskr
+            - name: MONGO_URI
+              value: "mongodb://mongo:27017/flaskr"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flaskr
+spec:
+  selector:
+    app: flaskr
+  ports:
+    - protocol: TCP
+      port: 8090
+      targetPort: 5000

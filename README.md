@@ -8,6 +8,7 @@ This is a microservices solution which is a simple Flask app that serves a Blog 
 - [Flask](http://flask.pocoo.org/) - The web framework used
 - [MongoDB](https://www.mongodb.com/) - The database used
 - [Docker](https://www.docker.com/) - The containerization platform used
+- [Kubernetes](https://kubernetes.io/) - The container orchestration platform used
 
 ## Prerequisites
 
@@ -72,6 +73,42 @@ docker run -p <port>:5000 -e "MONGODB_URI: <mongodb_uri>" flaskr
 
 ```bash
 docker-compose up
+```
+
+## Deployment
+
+### Kubernetes
+
+- Apply deployment
+
+In the deployment.yaml file you can change the image to your own image name.
+
+```bash
+kubectl apply -f kubernetes/deployment.yaml
+```
+
+- Use minikube to expose the service
+
+```bash
+minikube service flaskr
+```
+
+- Or port-forward the service
+
+```bash
+kubectl port-forward service/flaskr <port>:5000
+```
+
+- To delete the deployment
+
+```bash
+kubectl delete -f kubernetes/deployment.yaml
+```
+
+- To scale the deployment
+
+```bash
+kubectl scale deployment flaskr --replicas=<number>
 ```
 
 ## Resources
