@@ -1,6 +1,11 @@
 import functools
 from http import HTTPStatus
 from werkzeug.security import check_password_hash, generate_password_hash
+from flask_jwt_extended import (
+    create_access_token,
+    get_jwt_identity,
+    verify_jwt_in_request,
+)
 
 from ..utils.handler import SPSError, ErrorType
 from ..utils.db import get_db
@@ -95,9 +100,8 @@ class Login(Resource):
         if (user is None) or not check_password_hash(user['password'], password):
             raise SPSError(*ErrorType.INVALID_CREDENTIALS.value)
 
-        # TODO: generate token
-        token = user['_id'].__str__()
-        return {'token': token}, HTTPStatus.OK
+        access_token = create_access_token(identity=user['_id'].__str__())
+        return {'token': access_token}, HTTPStatus.OK
 
 
 def login_required(view):
@@ -105,15 +109,16 @@ def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
 
-        token = request.headers.get('Authorization')
-        if token is None:
-            raise SPSError(*ErrorType.AUTH_REQUIRED.value)
+        try:
+            verify_jwt_in_request()
+        except Exception:
+            raise SPSError(*ErrorType.INVALID_CREDENTIALS.value)
 
-        token = token.replace('Bearer ', '') if token else None
+        identity = get_jwt_identity()
         db = get_db()
-        user = db.user.find_one({'_id': ObjectId(token)})
+        user = db.user.find_one({'_id': ObjectId(identity)})
         if user is None:
-            raise SPSError(*ErrorType.AUTH_REQUIRED.value)
+            raise SPSError(*ErrorType.INVALID_CREDENTIALS.value)
 
         g.user = user
         return view(**kwargs)

@@ -2,4 +2,5 @@ flask==2.2.2
 pymongo==4.3.3
 flask-restful==0.3.9
 flask-swagger==0.2.14
+flask-jwt-extended==4.4.4
 requests==2.28.1

@@ -1,9 +1,9 @@
 from http import HTTPStatus
-from flask_restful import Resource
 from flask import (
     request, g,
     json
 )
+from flask_restful import Resource
 from bson import ObjectId
 import bson.json_util as json_util
 

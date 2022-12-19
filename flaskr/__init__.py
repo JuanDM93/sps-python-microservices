@@ -1,6 +1,8 @@
 import os
+import datetime
 from flask import Flask, Blueprint
 from flask_restful import Api
+from flask_jwt_extended import JWTManager
 
 
 def create_app(test_config=None):
@@ -23,6 +25,10 @@ def create_app(test_config=None):
     from .utils import db, handler
     db.init_app(app)
     app.register_error_handler(Exception, handler.error_handler)
+
+    # jwt
+    app.config['JWT_ACCESS_TOKEN_EXPIRES'] = datetime.timedelta(days=1)
+    jwt = JWTManager(app)
 
     # index
     from .utils.index import index_bp
